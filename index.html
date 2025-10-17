@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/indir" href="images/indir.png">
+    <link rel="stylesheet" href="index.css">
+    <title>Snake Game</title>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="snake-loader">
+            <div class="snake-segment"></div>
+            <div class="snake-segment"></div>
+            <div class="snake-segment"></div>
+            <div class="snake-segment"></div>
+            <div class="snake-segment"></div>
+        </div>
+        <div class="loader-text">Yükleniyor...</div>
+    </div>
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-circle shape1"></div>
+        <div class="shape shape-square shape2"></div>
+        <div class="shape shape-circle shape3"></div>
+        <div class="shape shape-square shape4"></div>
+        <div class="shape shape-circle shape5"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1>🐍 Snake Game</h1>
+        
+        <div id="menuScreen">
+            <h2 style="color: white; margin-bottom: 20px;">Oyun Modu Seç</h2>
+            
+            <!-- Ses Paketi Seçimi -->
+            <div style="margin-bottom: 25px;">
+                <label style="color: white; font-size: 1.1rem; font-weight: bold; display: block; margin-bottom: 10px;">
+                    🔊 Ses Paketi Seç:
+                </label>
+                <select id="soundPackSelect" onchange="changeSoundPack()" style="padding: 12px 20px; font-size: 1rem; border-radius: 10px; border: none; background: rgba(255,255,255,0.9); cursor: pointer; width: 100%; max-width: 300px; font-weight: bold;">
+                    <option value="classic">🎵 Klasik</option>
+                    <option value="cartoon">🎮 8 - Bit</option>
+                    <option value="man">💪🏻 Adam</option>
+                    <option value="cat">🐈 Kedy</option>
+                    <option value="kid">🧒🏻 Çocuk</option>
+                </select>
+            </div>
+            
+            <div class="menu-buttons">
+                <div class="mode-card classic-card" onclick="startGame('classic')">
+                    <h3>🎮 Klasik Mod</h3>
+                    <p>Geleneksel yılan oyunu. Skor arttıkça hız yavaşça artar. Başlangıç seviyesi için ideal!</p>
+                </div>
+                <div class="mode-card speed-card" onclick="startGame('speed')">
+                    <h3>⚡ Hızlandırılmış Mod</h3>
+                    <p>Yüksek hızda başlar! Reflekslerinizi test edin. Deneyimli oyuncular için zorlu bir deneyim.</p>
+                </div>
+                <div class="mode-card night-card" onclick="startGame('night')">
+                    <h3>🌙 Gece Modu</h3>
+                    <p>Karanlıkta oynayın! Elmalar sadece 2 adım yakınınızdayken görünür. Stratejik düşünmelisiniz.</p>
+                </div>
+                <div class="mode-card segmented-card" onclick="startGame('segmented')">
+                    <h3>🔗 Kesikli Yılan</h3>
+                    <p>Yılan her 4 parçada bir boşluk bırakarak uzar. Benzersiz bir zorluk deneyimi!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameScreen" class="hidden">
+            <div style="position: relative;">
+                <canvas id="game" width="400" height="400"></canvas>
+                <div class="game-over-overlay" id="gameOverOverlay">
+                    <h2>🎮 Oyun Bitti!</h2>
+                    <p id="finalScore">Skorunuz: 0</p>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="info-item">
+                    <span id="scoreDisplay">Skor: 0</span>
+                </div>
+                <div class="info-item">
+                    <span id="modeDisplay">Mod: -</span>
+                </div>
+            </div>
+            <div class="touch-controls">
+                <div class="control-btn empty"></div>
+                <div class="control-btn" onclick="changeDirection('up')">▲</div>
+                <div class="control-btn empty"></div>
+                <div class="control-btn" onclick="changeDirection('left')">◄</div>
+                <div class="control-btn" onclick="changeDirection('down')">▼</div>
+                <div class="control-btn" onclick="changeDirection('right')">►</div>
+            </div>
+            <div class="button-group">
+                <button class="game-btn replay-btn" onclick="replayGame()">🔄 Tekrar Oyna</button>
+                <button class="game-btn" onclick="backToMenu()">🏠 Ana Menü</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
