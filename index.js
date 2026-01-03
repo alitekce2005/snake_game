@@ -271,12 +271,29 @@ function drawApple() {
     }
 }
 
+// index.js dosyasındaki checkAppleCollision fonksiyonunu bununla tamamen değiştir:
+
 function checkAppleCollision() {
     if (appleX === headX && appleY === headY) {
         appleX = Math.floor(Math.random() * tileCount);
         appleY = Math.floor(Math.random() * tileCount);
         tailLength++;
-        score++;
+
+        // --- YENİ PUANLAMA SİSTEMİ ---
+        // Modun zorluğuna göre farklı puanlar veriyoruz
+        let points = 10; // Varsayılan (Klasik)
+
+        if (gameMode === 'segmented') {
+            points = 20; // Kesikli: 20 Puan
+        } else if (gameMode === 'speed') {
+            points = 30; // Hızlı: 30 Puan
+        } else if (gameMode === 'night') {
+            points = 50; // Gece: 50 Puan (En Zor)
+        }
+
+        score += points; // Belirlenen puanı ekle
+        // -----------------------------
+
         gulpSound.play();
     }
 }
